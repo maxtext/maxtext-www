@@ -48,7 +48,7 @@ jobs:
           git config --global user.name "$author"
           email="${email_author#*<}"; email="${email::-1}"
           git config --global user.email "$email"
-          ng build --configuration production --base-href 'https://'"$CNAME"
+          ng build --configuration production
           head -n6 README.md > "$DIST"'/README.md'
           mv "$DIST"'/browser'/* "$DIST"
           mv maxtext/site "$DIST"'/maxtext'
