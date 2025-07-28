@@ -1,0 +1,145 @@
+// Import the ability to create themes for elevation
+@use '@angular/material' as mat;
+
+/* --- Header & Toolbar Styles --- */
+.main-toolbar {
+  // Exact blue color from the target site
+  background: #1565c0;
+  color: white; // Ensure all text and icons inside are white by default
+
+  // mat-elevation-z4 is a good approximation of the target shadow
+  // This is now applied via class in the HTML for clarity
+}
+
+.brand-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+
+  .brand-logo {
+    height: 36px;
+    width: 36px;
+    margin-right: 8px;
+  }
+
+  .brand-name {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .divider {
+    font-size: 24px;
+    font-weight: 100;
+    opacity: 0.3;
+    margin: 0 16px;
+  }
+
+  .project-name {
+    font-size: 20px;
+    font-weight: 300;
+    opacity: 0.7;
+  }
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.nav-buttons {
+  display: none; // Hide links by default on mobile
+
+  // Show navigation buttons on screens wider than 768px
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: center;
+  }
+
+  a.mat-mdc-button {
+    // Ensure text color is white, overriding potential theme issues
+    color: white;
+  }
+}
+
+// Ensure the GitHub icon is also white
+a.mat-mdc-icon-button {
+  color: white;
+}
+
+/* --- Main Layout & Containers --- */
+.page-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.tab-content { padding: 24px 8px; }
+
+/* --- Cards & Content --- */
+.content-card { margin-bottom: 24px; }
+.section-divider { margin-top: 32px; margin-bottom: 32px; }
+h1 { font-size: 2em; font-weight: 300; margin-bottom: 0; }
+h2 { font-size: 1.5em; font-weight: 400; }
+.build-badge { vertical-align: middle; margin-left: 16px; }
+
+/* --- Card Grid for "Getting Started" --- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  .mat-card-avatar { font-size: 40px; width: 40px; height: 40px; }
+}
+
+/* --- Announcements List --- */
+.highlight-announcement {
+  background-color: #fff3e0;
+  border-left: 4px solid #ff9800;
+  border-radius: 4px;
+  .mat-icon { color: #f57c00; }
+  .mat-list-item-content { padding-left: 12px !important; }
+}
+
+/* --- Table Styles --- */
+.table-container { overflow-x: auto; margin-top: 16px; }
+table.mat-mdc-table { width: 100%; }
+.mat-mdc-progress-bar { height: 8px !important; border-radius: 4px; margin-top: 4px; }
+
+/* --- Chart Styles --- */
+.chart-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 200px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.chart-placeholder {
+  height: 450px;
+}
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 24px;
+}
+.chart-container {
+  margin-top: 16px;
+  width: 90%;
+  height: 200px;
+}
+
+/* --- Code Blocks & Expansion Panels --- */
+pre {
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 16px;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+footer {
+  padding: 25px 25px 25px;
+  text-align: center;
+  background-color: #1565c0;
+  color: whitesmoke;
+}

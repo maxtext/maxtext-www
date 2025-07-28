@@ -1,0 +1,51 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: "[maxtext] Generate documentation"
+        run: |
+          git clone --depth=1 --single-branch --branch=docgen https://github.com/SamuelMarks/maxtext
+          pushd maxtext
+          python3 -m pip install -U pip
+          python3 -m pip install -U setuptools wheel
+          python3 -m pip install -r requirements-docs.txt
+          mkdocs build
+          popd
+
+      - name: Prepare and deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+          DIST: 'dist/maxtext-www'
+          TARGET: 'maxtext/maxtext.github.io'
+        run: |
+          npm i -g npm
+          npm i -g @angular/cli typescript angular-cli-ghpages
+          ng add --skip-confirmation angular-cli-ghpages
+          npm ci
+          MSG="$(git show -s --format='%s' "$GITHUB_SHA")"
+          email_author="$(git log -1 --pretty=format:'%an <%ce>')"
+          author="${email_author% *}"
+          git config --global user.name "$author"
+          email="${email_author#*<}"; email="${email::-1}"
+          git config --global user.email "$email"
+          ng build --configuration production --base-href 'https://'"$CNAME"
+          head -n6 README.md > "$DIST"'/README.md'
+          mv "$DIST"'/browser'/* "$DIST"
+          mv maxtext/site "$DIST"'/maxtext'
+          npx angular-cli-ghpages --dir="$DIST" --repo='https://'"$GITHUB_TOKEN"'@github.com/'"$TARGET" --branch='master' --message="$MSG" --name="$name" --email="$email" --no-silent
