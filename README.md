@@ -2,6 +2,7 @@ maxtext-www
 ===========
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![GitHub Pages](https://github.com/maxtext/maxtext-www/actions/workflows/main.yml/badge.svg)](https://github.com/maxtext/maxtext-www/actions/workflows/main.yml)
 
 Simple repository to that is used to automatically generate the new documentation site for https://github.com/AI-Hypercomputer/maxtext
 
