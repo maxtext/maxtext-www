@@ -16,6 +16,10 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v6
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts'
+
       - name: "[maxtext] Generate documentation"
         run: |
           git clone --depth=1 --single-branch --branch=docgen https://github.com/SamuelMarks/maxtext
