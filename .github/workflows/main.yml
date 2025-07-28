@@ -20,6 +20,7 @@ jobs:
         run: |
           git clone --depth=1 --single-branch --branch=docgen https://github.com/SamuelMarks/maxtext
           pushd maxtext
+          uv venv
           uv pip install -r requirements-docs.txt
           mkdocs build
           popd
